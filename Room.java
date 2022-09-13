@@ -58,4 +58,8 @@ class Room
         return description;
     }
 
+    public String getTask() {
+        return task;
+    }
+
 }

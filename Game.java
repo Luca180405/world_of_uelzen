@@ -11,8 +11,8 @@
  *  rooms, creates the parser and starts the game.  It also evaluates and
  *  executes the commands that the parser returns.
  * 
- * @author  Michael Kolling and David J. Barnes
- * @version 1.0 (February 2002)
+ * @author  Luca D'Aguanno
+ * @version 1.0 (September 2022)
  */
 
 class Game 
@@ -171,7 +171,7 @@ class Game
         else {
             currentRoom = nextRoom;
             System.out.println("You are " + currentRoom.getDescription());
-            System.out.println("Your Task ...");
+            System.out.println("Your Task " + currentRoom.getTask());
             System.out.print("Exits: ");
             if(currentRoom.northExit != null)
                 System.out.print("north ");
