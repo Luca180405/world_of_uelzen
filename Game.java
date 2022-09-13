@@ -44,7 +44,7 @@ class Game
       
         // create the rooms
         outside = new Room("outside the main entrance of the city🏙️", "");
-        theatre = new Room("in the theatre🎭", "");
+        theatre = new Room("in the theatre🎭", "t");
         pub = new Room("in the city pub🍾", "");
         gym = new Room("in a gym🏃", "");
         policeoffice = new Room("in the police office👮‍♂️", "");
@@ -171,7 +171,7 @@ class Game
         else {
             currentRoom = nextRoom;
             System.out.println("You are " + currentRoom.getDescription());
-            System.out.println("Your Task " + currentRoom.getTask());
+            System.out.println("Your Task: " + currentRoom.getTask());
             System.out.print("Exits: ");
             if(currentRoom.northExit != null)
                 System.out.print("north ");
