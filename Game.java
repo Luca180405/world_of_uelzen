@@ -43,11 +43,11 @@ class Game
         Room outside, theatre, pub, gym, policeoffice;
       
         // create the rooms
-        outside = new Room("outside the main entrance of the city🏙️", "");
+        outside = new Room("outside the main entrance of the city🏙️", "o");
         theatre = new Room("in the theatre🎭", "t");
-        pub = new Room("in the city pub🍾", "");
-        gym = new Room("in a gym🏃", "");
-        policeoffice = new Room("in the police office👮‍♂️", "");
+        pub = new Room("in the city pub🍾", "p");
+        gym = new Room("in a gym🏃", "g");
+        policeoffice = new Room("in the police office👮‍♂️", "p");
         
         // initialise room exits
         outside.setExits(null, theatre, gym, pub);
