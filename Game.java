@@ -43,11 +43,11 @@ class Game
         Room outside, theatre, pub, gym, policeoffice;
       
         // create the rooms
-        outside = new Room("outside the main entrance of the city");
-        theatre = new Room("in the theatre");
-        pub = new Room("in the city pub");
-        gym = new Room("in a gym");
-        policeoffice = new Room("in the police office");
+        outside = new Room("outside the main entrance of the city🏙️", "");
+        theatre = new Room("in the theatre🎭", "");
+        pub = new Room("in the city pub🍾", "");
+        gym = new Room("in a gym🏃", "");
+        policeoffice = new Room("in the police office👮‍♂️", "");
         
         // initialise room exits
         outside.setExits(null, theatre, gym, pub);
@@ -83,7 +83,7 @@ class Game
     private void printWelcome()
     {
         System.out.println();
-        System.out.println("Welcome to Adventure!");
+        System.out.println("Welcome to this Adventure!");
         System.out.println("Adventure is a new, incredibly boring adventure game.");
         System.out.println("Type 'help' if you need help.");
         System.out.println();
@@ -171,6 +171,7 @@ class Game
         else {
             currentRoom = nextRoom;
             System.out.println("You are " + currentRoom.getDescription());
+            System.out.println("Your Task ...");
             System.out.print("Exits: ");
             if(currentRoom.northExit != null)
                 System.out.print("north ");

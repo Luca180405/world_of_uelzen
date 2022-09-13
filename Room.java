@@ -16,6 +16,7 @@
 class Room 
 {
     public String description;
+    public String task;
     public Room northExit;
     public Room southExit;
     public Room eastExit;
@@ -26,9 +27,10 @@ class Room
      * no exits. "description" is something like "a kitchen" or
      * "an open court yard".
      */
-    public Room(String description) 
+    public Room(String description, String task) 
     {
         this.description = description;
+        this.task = task;
     }
 
     /**
