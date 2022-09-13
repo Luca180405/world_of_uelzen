@@ -40,21 +40,21 @@ class Game
      */
     private void createRooms()
     {
-        Room outside, theatre, pub, lab, office;
+        Room outside, theatre, pub, gym, policeoffice;
       
         // create the rooms
-        outside = new Room("outside the main entrance of the university");
-        theatre = new Room("in a lecture theatre");
+        outside = new Room("outside the main entrance of the city");
+        theatre = new Room("in the theatre");
         pub = new Room("in the campus pub");
-        lab = new Room("in a computing lab");
-        office = new Room("in the computing admin office");
+        gym = new Room("in a computing lab");
+        policeoffice = new Room("in the computing admin office");
         
         // initialise room exits
-        outside.setExits(null, theatre, lab, pub);
+        outside.setExits(null, theatre, gym, pub);
         theatre.setExits(null, null, null, outside);
         pub.setExits(null, outside, null, null);
-        lab.setExits(outside, office, null, null);
-        office.setExits(null, null, null, lab);
+        gym.setExits(outside, policeoffice, null, null);
+        policeoffice.setExits(null, null, null, gym);
 
         currentRoom = outside;  // start game outside
     }
@@ -74,7 +74,7 @@ class Game
             Command command = parser.getCommand();
             finished = processCommand(command);
         }
-        System.out.println("Thank you for playing.  Good bye.");
+        System.out.println("Thank you for playing.🎉  Good bye.👋");
     }
 
     /**
@@ -90,13 +90,13 @@ class Game
         System.out.println("You are " + currentRoom.getDescription());
         System.out.print("Exits: ");
         if(currentRoom.northExit != null)
-            System.out.print("north ");
+            System.out.print("north⬆️ ");
         if(currentRoom.eastExit != null)
-            System.out.print("east ");
+            System.out.print("east➡️ ");
         if(currentRoom.southExit != null)
-            System.out.print("south ");
+            System.out.print("south⬇️ ");
         if(currentRoom.westExit != null)
-            System.out.print("west ");
+            System.out.print("west⬅️ ");
         System.out.println();
     }
 
