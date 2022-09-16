@@ -16,11 +16,11 @@
 class Room 
 {
     public String description;
-    public String task;
     public Room northExit;
     public Room southExit;
     public Room eastExit;
     public Room westExit;
+    public String tasks;
 
     /**
      * Create a room described "description". Initially, it has
@@ -30,7 +30,7 @@ class Room
     public Room(String description, String task) 
     {
         this.description = description;
-        this.task = task;
+        this.tasks = task;
     }
 
     /**
@@ -58,8 +58,9 @@ class Room
         return description;
     }
 
-    public String getTask() {
-        return task;
+    public String getTask()
+    {
+        return tasks;
     }
 
 }
