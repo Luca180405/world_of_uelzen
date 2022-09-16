@@ -25,7 +25,7 @@ class Game
 
     private Parser parser;
     private Room currentRoom;
-    public int coins;
+    public int coins = 0;
     private boolean searchTask = true;
         
     /**
@@ -42,10 +42,11 @@ class Game
      */
     private void createRooms()
     {
-        Room outside, theatre, pub, gym, policeoffice;
+        Room outside, theatre, pub, gym, policeoffice, marktcenter;
       
         // create the rooms
         outside = new Room("outside the main entrance of the city🏙️", "Go to every location on the map!");
+        marktcenter = new Room("in the marktcenter🛒","");
         theatre = new Room("in the theatre🎭", "Find the actors in the city!");
         pub = new Room("in the city pub🍾", "Drink more shots as the buddergolem!!");
         gym = new Room("in a gym🏃", "Find the lost dumbbell in the city!");
@@ -57,6 +58,7 @@ class Game
         pub.setExits(null, outside, null, null);
         gym.setExits(outside, policeoffice, null, null);
         policeoffice.setExits(null, null, null, gym);
+        marktcenter.setExits(null, gym, null, null);
 
         currentRoom = outside;  // start game outside
     }
@@ -102,6 +104,22 @@ class Game
         System.out.println();
     }
 
+
+    private void look()
+    {
+        System.out.println("You're " + currentRoom.description);
+    }
+
+    private void accept()
+    {
+        searchTask = false;
+    }
+
+    private void printCoins()
+    {
+        System.out.println("Your current balance are " + coins + " Coins");
+    }
+
     /**
      * Given a command, process (that is: execute) the command.
      * If this command ends the game, true is returned, otherwise false is
@@ -121,6 +139,12 @@ class Game
             printHelp();
         else if (commandWord.equals("go"))
             goRoom(command);
+        else if (commandWord.equals("look"))
+            look();
+        else if (commandWord.equals("accept"))
+            accept();
+        else if (commandWord.equals("coins"))
+            printCoins();
         else if (commandWord.equals("quit"))
             wantToQuit = quit(command);
 
@@ -140,7 +164,7 @@ class Game
         System.out.println("around at the university.");
         System.out.println();
         System.out.println("Your command words are:");
-        System.out.println("   go quit help");
+        System.out.println("   go quit help look accept coins");
     }
 
     /** 
