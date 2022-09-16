@@ -25,6 +25,8 @@ class Game
 
     private Parser parser;
     private Room currentRoom;
+    public int coins;
+    private boolean searchTask = true;
         
     /**
      * Create the game and initialise its internal map.
@@ -43,11 +45,11 @@ class Game
         Room outside, theatre, pub, gym, policeoffice;
       
         // create the rooms
-        outside = new Room("outside the main entrance of the city🏙️", "");
-        theatre = new Room("in the theatre🎭", "");
-        pub = new Room("in the city pub🍾", "");
-        gym = new Room("in a gym🏃", "");
-        policeoffice = new Room("in the police office👮‍♂️", "");
+        outside = new Room("outside the main entrance of the city🏙️", "Go to every location on the map!");
+        theatre = new Room("in the theatre🎭", "Find the actors in the city!");
+        pub = new Room("in the city pub🍾", "Drink more shots as the buddergolem!!");
+        gym = new Room("in a gym🏃", "Find the lost dumbbell in the city!");
+        policeoffice = new Room("in the police office👮‍♂️", "Help the police officers to find the rascal!");
         
         // initialise room exits
         outside.setExits(null, theatre, gym, pub);
@@ -171,7 +173,11 @@ class Game
         else {
             currentRoom = nextRoom;
             System.out.println("You are " + currentRoom.getDescription());
+
+            if(searchTask) {
             System.out.println("Your Task: " + currentRoom.getTask());
+            }
+
             System.out.print("Exits: ");
             if(currentRoom.northExit != null)
                 System.out.print("north ");
