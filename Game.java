@@ -46,7 +46,7 @@ class Game
       
         // create the rooms
         outside = new Room("outside the main entrance of the city🏙️", "Go to every location on the map!");
-        marktcenter = new Room("in the marktcenter🛒","");
+        marktcenter = new Room("in the marktcenter🛒","Find some energy drinks to increase your strength!");
         theatre = new Room("in the theatre🎭", "Find the actors in the city!");
         pub = new Room("in the city pub🍾", "Drink more shots as the buddergolem!!");
         gym = new Room("in a gym🏃", "Find the lost dumbbell in the city!");
@@ -54,11 +54,11 @@ class Game
         
         // initialise room exits
         outside.setExits(null, theatre, gym, pub);
-        theatre.setExits(null, null, null, outside);
+        theatre.setExits(null, marktcenter, null, outside);
         pub.setExits(null, outside, null, null);
         gym.setExits(outside, policeoffice, null, null);
         policeoffice.setExits(null, null, null, gym);
-        marktcenter.setExits(null, gym, null, null);
+        marktcenter.setExits(null, null, gym, null);
 
         currentRoom = outside;  // start game outside
     }
