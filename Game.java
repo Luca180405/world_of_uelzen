@@ -30,7 +30,7 @@ class Game
     public int coins = 0;
     public int roomNumber = getRandomNumberInRange(1,6);
     private boolean searchTask = true;
-    private boolean lookedOutside;
+    private boolean lookOutside;
     private boolean lookMarktcenter;
     private boolean lookTheatre;
     private boolean lookPub;
@@ -89,6 +89,7 @@ class Game
         if(roomNumber == 6) {
         currentRoom = policeoffice;
         }
+
     }
 
     /**
@@ -122,13 +123,13 @@ class Game
         System.out.println("You are " + currentRoom.getDescription());
         System.out.print("Exits: ");
         if(currentRoom.northExit != null)
-            System.out.print("north⬆️ ");
+            System.out.print("north ");
         if(currentRoom.eastExit != null)
-            System.out.print("east➡️ ");
+            System.out.print("east ");
         if(currentRoom.southExit != null)
-            System.out.print("south⬇️ ");
+            System.out.print("south ");
         if(currentRoom.westExit != null)
-            System.out.print("west⬅️ ");
+            System.out.print("west ");
         System.out.println();
     }
 
@@ -141,6 +142,11 @@ class Game
     private void accept()
     {
         searchTask = false;
+        coins += 10;
+    }
+
+    private void donate() {
+        coins = 0;
     }
 
     private void printCoins()
@@ -181,6 +187,8 @@ class Game
             look();
         else if (commandWord.equals("accept"))
             accept();
+        else if (commandWord.equals("donate"))
+            donate();
         else if (commandWord.equals("coins"))
             printCoins();
         else if (commandWord.equals("quit"))
