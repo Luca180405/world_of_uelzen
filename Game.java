@@ -30,12 +30,6 @@ class Game
     public int coins = 0;
     public int roomNumber = getRandomNumberInRange(1,6);
     private boolean searchTask = true;
-    private boolean lookOutside;
-    private boolean lookMarktcenter;
-    private boolean lookTheatre;
-    private boolean lookPub;
-    private boolean lookGym;
-    private boolean lookPoliceoffice;
         
     /**
      * Create the game and initialise its internal map.
@@ -142,7 +136,7 @@ class Game
     private void accept()
     {
         searchTask = false;
-        coins += 10;
+        coins += 5;
     }
 
     private void donate() {
