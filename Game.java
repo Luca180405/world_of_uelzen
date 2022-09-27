@@ -15,6 +15,8 @@
  * @version 1.0 (September 2022)
  */
 
+import java.util.Random;
+
 class Game 
 {
     // ~~~ initialization ~~~
@@ -26,7 +28,14 @@ class Game
     private Parser parser;
     private Room currentRoom;
     public int coins = 0;
+    public int roomNumber = getRandomNumberInRange(1,6);
     private boolean searchTask = true;
+    private boolean lookedOutside;
+    private boolean lookMarktcenter;
+    private boolean lookTheatre;
+    private boolean lookPub;
+    private boolean lookGym;
+    private boolean lookPoliceoffice;
         
     /**
      * Create the game and initialise its internal map.
@@ -60,7 +69,26 @@ class Game
         policeoffice.setExits(null, null, null, gym);
         marktcenter.setExits(null, null, gym, null);
 
-        currentRoom = outside;  // start game outside
+        //startinglocation of the game
+        
+        if(roomNumber == 1) {
+        currentRoom = outside; 
+        }
+            if(roomNumber == 2) {
+        currentRoom = marktcenter;
+        }
+        if(roomNumber == 3) {
+            currentRoom = theatre;
+        }
+        if(roomNumber == 4) {
+        currentRoom = pub;
+        }
+        if(roomNumber == 5) {
+        currentRoom = gym;
+        }
+        if(roomNumber == 6) {
+        currentRoom = policeoffice;
+        }
     }
 
     /**
@@ -120,6 +148,16 @@ class Game
         System.out.println("Your current balance are " + coins + " Coins");
     }
 
+
+    private static int getRandomNumberInRange(int min, int max) {
+
+		if (min >= max) {
+			throw new IllegalArgumentException("max must be greater than min");
+		}
+
+		Random r = new Random();
+		return r.nextInt((max - min) + 1) + min;
+	}
     /**
      * Given a command, process (that is: execute) the command.
      * If this command ends the game, true is returned, otherwise false is
