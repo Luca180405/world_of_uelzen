@@ -30,6 +30,7 @@ class Game
     public int coins = 0;
     public int roomNumber = getRandomNumberInRange(1,6);
     private boolean searchTask = true;
+    Room outside, theatre, pub, gym, policeoffice, marktcenter;
         
     /**
      * Create the game and initialise its internal map.
@@ -44,9 +45,7 @@ class Game
      * Create all the rooms and link their exits together.
      */
     private void createRooms()
-    {
-        Room outside, theatre, pub, gym, policeoffice, marktcenter;
-      
+    { 
         // create the rooms
         outside = new Room("outside the main entrance of the city🏙️", "Go to every location on the map!");
         marktcenter = new Room("in the marktcenter🛒","Find some energy drinks to increase your strength!");
@@ -142,6 +141,10 @@ class Game
         System.out.println("Your current balance are " + coins + " Coins");
     }
 
+    private void shop() {
+        
+    }
+
 
     private static int getRandomNumberInRange(int min, int max) {
 
@@ -177,6 +180,8 @@ class Game
             donate();
         else if (commandWord.equals("coins"))
             printCoins();
+        else if(commandWord.equals("shop") && currentRoom == marktcenter)
+            shop();
         else if (commandWord.equals("quit"))
             wantToQuit = quit(command);
 
@@ -196,7 +201,7 @@ class Game
         System.out.println("around at the university.");
         System.out.println();
         System.out.println("Your command words are:");
-        System.out.println("   go quit help look accept coins donate ");
+        System.out.println("   go quit help look coins donate shop ");
     }
 
     /** 
