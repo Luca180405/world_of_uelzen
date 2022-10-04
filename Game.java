@@ -48,7 +48,7 @@ class Game
     { 
         // create the rooms
         outside = new Room("outside the main entrance of the city🏙️", "Go to every location on the map!");
-        marktcenter = new Room("in the marktcenter🛒","Find some energy drinks to increase your strength!");
+        marktcenter = new Room("in the marktcenter🛒","Find some energy drinks to increase your strength! To buy things at the store type in 'shop'!");
         theatre = new Room("in the theatre🎭", "Find the actors in the city!");
         pub = new Room("in the city pub🍾", "Drink more shots as the buddergolem!!");
         gym = new Room("in a gym🏃", "Find the lost dumbbell in the city!");
@@ -142,9 +142,17 @@ class Game
     }
 
     private void shop() {
-        
+        System.out.println("Welcome in the marktcenter!");
+        System.out.println("You can buy some powerups here!");
+        System.out.println("Please type in the command 'offer' to see all offers!");
     }
 
+    private void offer() {
+        System.out.println("Here are all offers that we have here:");
+        System.out.println("");
+        System.out.println("1 Energy Drink:");
+        System.out.println("  3 coins");
+    }
 
     private static int getRandomNumberInRange(int min, int max) {
 
@@ -182,6 +190,8 @@ class Game
             printCoins();
         else if(commandWord.equals("shop") && currentRoom == marktcenter)
             shop();
+        else if(commandWord.equals("offer") && currentRoom == marktcenter)
+            offer();
         else if (commandWord.equals("quit"))
             wantToQuit = quit(command);
 
