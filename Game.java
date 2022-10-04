@@ -144,6 +144,10 @@ class Game
         System.out.println("Your current balance are " + coins + " Coins");
     }
 
+    private void showInventory() {
+        System.out.println("Inventory");
+    }
+
     private void shop() {
         System.out.println("Welcome in the marktcenter!");
         System.out.println("You can buy some powerups here!");
@@ -195,6 +199,8 @@ class Game
             shop();
         else if(commandWord.equals("offer") && currentRoom == marktcenter)
             offer();
+        else if(commandWord.equals("inventory"))
+            showInventory();
         else if (commandWord.equals("quit"))
             wantToQuit = quit(command);
 
@@ -214,7 +220,7 @@ class Game
         System.out.println("around at the university.");
         System.out.println();
         System.out.println("Your command words are:");
-        System.out.println("   go quit help look coins donate shop ");
+        System.out.println("   go quit help look coins donate shop inventory ");
     }
 
     /** 
