@@ -32,6 +32,9 @@ class Game
     private boolean searchTask = true;
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_GREEN = "\u001B[32m";
+    public static final String ANSI_BLUE = "\u001B[34m";
+    public static final String ANSI_YELLOW = "\u001B[33m";
+    public static final String ANSI_RED = "	\u001B[31m";
 
     Room outside, theatre, pub, gym, policeoffice, marktcenter;
         
@@ -159,6 +162,8 @@ class Game
         System.out.println("");
         System.out.println(ANSI_GREEN + "1 Energy Drink:");
         System.out.println("  3 coins" + ANSI_RESET);
+        System.out.println("");
+        System.out.println(ANSI_RED + "more coming soon..." + ANSI_RESET);
     }
 
     private static int getRandomNumberInRange(int min, int max) {
