@@ -30,6 +30,9 @@ class Game
     public int coins = 0;
     public int roomNumber = getRandomNumberInRange(1,6);
     private boolean searchTask = true;
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_GREEN = "\u001B[32m";
+
     Room outside, theatre, pub, gym, policeoffice, marktcenter;
         
     /**
@@ -150,8 +153,8 @@ class Game
     private void offer() {
         System.out.println("Here are all offers that we have here:");
         System.out.println("");
-        System.out.println("1 Energy Drink:");
-        System.out.println("  3 coins");
+        System.out.println(ANSI_GREEN + "1 Energy Drink:");
+        System.out.println("  3 coins" + ANSI_RESET);
     }
 
     private static int getRandomNumberInRange(int min, int max) {
