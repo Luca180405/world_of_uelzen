@@ -133,12 +133,6 @@ class Game
         System.out.println("You're " + currentRoom.description);
     }
 
-    private void accept()
-    {
-        searchTask = false;
-        coins += 5;
-    }
-
     private void donate() {
         coins = 0;
     }
@@ -179,8 +173,6 @@ class Game
             goRoom(command);
         else if (commandWord.equals("look"))
             look();
-        else if (commandWord.equals("accept"))
-            accept();
         else if (commandWord.equals("donate"))
             donate();
         else if (commandWord.equals("coins"))
@@ -204,7 +196,7 @@ class Game
         System.out.println("around at the university.");
         System.out.println();
         System.out.println("Your command words are:");
-        System.out.println("   go quit help look accept coins");
+        System.out.println("   go quit help look accept coins donate ");
     }
 
     /** 
