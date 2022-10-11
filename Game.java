@@ -27,6 +27,8 @@ class Game
 
     private Parser parser;
     private Room currentRoom;
+    public String[] items = {ANSI_YELLOW + "Energy Drink" + ANSI_RESET, ANSI_GREEN + "Green Apple" + ANSI_RESET ,ANSI_RED + "Pistol from the police officer" + ANSI_RESET};
+    public String[] inventoryItems = new String[3];
     public int coins = 0;
     public int roomNumber = getRandomNumberInRange(1,6);
     private boolean searchTask = true;
@@ -45,6 +47,8 @@ class Game
     {
         createRooms();
         parser = new Parser();
+
+        inventoryItems[0] = ANSI_BLUE + "Bottle of water" + ANSI_RESET;
     }
 
     /**
@@ -148,7 +152,9 @@ class Game
     }
 
     private void showInventory() {
-        System.out.println("Inventory");
+
+        for(int i=0; i<inventoryItems.length;i++)
+            System.out.println(inventoryItems[i]);
     }
 
     private void shop() {
