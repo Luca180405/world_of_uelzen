@@ -27,7 +27,7 @@ class Game
 
     private Parser parser;
     private Room currentRoom;
-    public String[] items = {ANSI_YELLOW + "Energy Drink" + ANSI_RESET, ANSI_GREEN + "Green Apple" + ANSI_RESET ,ANSI_RED + "Pistol from the police officer" + ANSI_RESET};
+    public String[] items = {ANSI_YELLOW + "Energy Drink" + ANSI_RESET, ANSI_GREEN + "Green Apple" + ANSI_RESET , ANSI_RED + "Pistol from the police officer" + ANSI_RESET};
     public String[] inventoryItems = new String[3];
     private int itemNumber = 0;
     public int coins = 100;
@@ -179,6 +179,12 @@ class Game
             System.out.println("Whatcha wanna buy?");
             return;
         }
+
+        String item = icommand.getSecondWord();
+
+        if(item.equals("1")) {inventoryItems[1] = items[1];}
+        if(item.equals("2")) {inventoryItems[2] = items[2];}
+        if(item.equals("3")) {inventoryItems[3] = items[3];}
     }
 
     private static int getRandomNumberInRange(int min, int max) {
