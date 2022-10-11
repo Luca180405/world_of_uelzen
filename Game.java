@@ -29,7 +29,8 @@ class Game
     private Room currentRoom;
     public String[] items = {ANSI_YELLOW + "Energy Drink" + ANSI_RESET, ANSI_GREEN + "Green Apple" + ANSI_RESET ,ANSI_RED + "Pistol from the police officer" + ANSI_RESET};
     public String[] inventoryItems = new String[3];
-    public int coins = 0;
+    private int itemNumber = 0;
+    public int coins = 100;
     public int roomNumber = getRandomNumberInRange(1,6);
     private boolean searchTask = true;
     public static final String ANSI_RESET = "\u001B[0m";
@@ -172,6 +173,14 @@ class Game
         System.out.println(ANSI_RED + "more coming soon..." + ANSI_RESET);
     }
 
+    private void buy(Command icommand) {
+
+        if(!icommand.hasSecondWord()) {
+            System.out.println("Whatcha wanna buy?");
+            return;
+        }
+    }
+
     private static int getRandomNumberInRange(int min, int max) {
 
 		if (min >= max) {
@@ -208,6 +217,8 @@ class Game
             printCoins();
         else if(commandWord.equals("shop") && currentRoom == marktcenter)
             shop();
+        else if(commandWord.equals("buy") && currentRoom == marktcenter)
+            buy(command);
         else if(commandWord.equals("offer") && currentRoom == marktcenter)
             offer();
         else if(commandWord.equals("inventory"))
