@@ -27,8 +27,8 @@ class Game
 
     private Parser parser;
     private Room currentRoom;
-    public String[] items = {ANSI_YELLOW + "Energy Drink" + ANSI_RESET, ANSI_GREEN + "Green Apple" + ANSI_RESET , ANSI_RED + "Pistol from the police officer" + ANSI_RESET};
-    public String[] inventoryItems = new String[3];
+    public String[] items = {"" + ANSI_YELLOW + "Energy Drink" + ANSI_RESET, ANSI_GREEN + "Green Apple" + ANSI_RESET , "Pistol from the police officer"};
+    public String[] inventoryItems = new String[4];
     private int itemNumber = 0;
     public int coins = 100;
     public int roomNumber = getRandomNumberInRange(1,6);
@@ -73,7 +73,6 @@ class Game
         policeoffice.setExits(null, null, null, gym);
         marktcenter.setExits(null, null, gym, null);
 
-        //startinglocation of the game
         
         if(roomNumber == 1) {
         currentRoom = outside; 
@@ -168,9 +167,15 @@ class Game
         System.out.println("Here are all offers that we have here:");
         System.out.println("");
         System.out.println(ANSI_GREEN + "1 Energy Drink:");
-        System.out.println("  3 coins" + ANSI_RESET);
+        System.out.println("    10 coins" + ANSI_RESET);
         System.out.println("");
-        System.out.println(ANSI_RED + "more coming soon..." + ANSI_RESET);
+        System.out.println(ANSI_BLUE + "1 Green Apple");
+        System.out.println("    6 coins" + ANSI_RESET);
+        System.out.println("");
+        System.out.println(ANSI_YELLOW + "1 Pistol from the police officer");
+        System.out.println("    50 coins" + ANSI_RESET);
+        System.out.println("");
+        System.out.println("Use the number of the product to buy it!");
     }
 
     private void buy(Command icommand) {
@@ -182,9 +187,9 @@ class Game
 
         String item = icommand.getSecondWord();
 
-        if(item.equals("1")) {inventoryItems[1] = items[1];}
-        if(item.equals("2")) {inventoryItems[2] = items[2];}
-        if(item.equals("3")) {inventoryItems[3] = items[3];}
+        if(item.equals("1") && coins >= 10) {inventoryItems[1] = items[1];}
+        if(item.equals("2") && coins >= 6) {inventoryItems[2] = items[2];}
+        if(item.equals("3") && coins >= 50) {inventoryItems[3] = items[3];}
     }
 
     private static int getRandomNumberInRange(int min, int max) {
@@ -248,7 +253,7 @@ class Game
         System.out.println("around at the university.");
         System.out.println();
         System.out.println("Your command words are:");
-        System.out.println("   go quit help look coins donate shop inventory ");
+        System.out.println("   go quit help look coins donate shop offer inventory buy   ");
     }
 
     /** 
