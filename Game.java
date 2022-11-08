@@ -27,9 +27,9 @@ class Game
 
     private Parser parser;
     private Room currentRoom;
-    public String[] items = {"" + ANSI_YELLOW + "Energy Drink" + ANSI_RESET, ANSI_GREEN + "Green Apple" + ANSI_RESET , "Pistol from the police officer"};
-    public String[] inventoryItems = new String[4];
-    private int itemNumber = 0;
+    public String[] items = {ANSI_YELLOW + "Energy Drink" + ANSI_RESET, ANSI_GREEN + "Green Apple" + ANSI_RESET , "Pistol from the police officer"};
+    public String[] inventoryItems = new String[3];
+    private int itemNumber = 1;
     public int coins = 100;
     public int roomNumber = getRandomNumberInRange(1,6);
     private boolean searchTask = true;
@@ -69,7 +69,7 @@ class Game
         outside.setExits(null, theatre, gym, pub);
         theatre.setExits(null, marktcenter, null, outside);
         pub.setExits(null, outside, null, null);
-        gym.setExits(outside, policeoffice, null, null);
+        gym.setExits(marktcenter, policeoffice, null, null);
         policeoffice.setExits(null, null, null, gym);
         marktcenter.setExits(null, null, gym, null);
 
@@ -169,10 +169,10 @@ class Game
         System.out.println(ANSI_GREEN + "1 Energy Drink:");
         System.out.println("    10 coins" + ANSI_RESET);
         System.out.println("");
-        System.out.println(ANSI_BLUE + "1 Green Apple");
+        System.out.println(ANSI_BLUE + "2 Green Apple");
         System.out.println("    6 coins" + ANSI_RESET);
         System.out.println("");
-        System.out.println(ANSI_YELLOW + "1 Pistol from the police officer");
+        System.out.println(ANSI_YELLOW + "3 Pistol from the police officer");
         System.out.println("    50 coins" + ANSI_RESET);
         System.out.println("");
         System.out.println("Use the number of the product to buy it!");
@@ -187,9 +187,9 @@ class Game
 
         String item = icommand.getSecondWord();
 
-        if(item.equals("1") && coins >= 10) {inventoryItems[1] = items[1];}
-        if(item.equals("2") && coins >= 6) {inventoryItems[2] = items[2];}
-        if(item.equals("3") && coins >= 50) {inventoryItems[3] = items[3];}
+        if(item.equals("1") && coins >= 10) {inventoryItems[0] = items[0];}
+        if(item.equals("2") && coins >= 6) {inventoryItems[1] = items[1];}
+        if(item.equals("3") && coins >= 50) {inventoryItems[2] = items[2];}
     }
 
     private static int getRandomNumberInRange(int min, int max) {
