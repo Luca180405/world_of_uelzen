@@ -28,8 +28,8 @@ class Game
     private Parser parser;
     private Room currentRoom;
     public String[] items = {ANSI_YELLOW + "Energy Drink" + ANSI_RESET, ANSI_GREEN + "Green Apple" + ANSI_RESET , "Pistol from the police officer"};
-    public String[] inventoryItems = new String[3];
-    private int itemNumber = 1;
+    public String[] inventoryItems = new String[4];
+    private int itemNumber = 0;
     public int coins = 100;
     public int roomNumber = getRandomNumberInRange(1,6);
     private boolean searchTask = true;
@@ -187,9 +187,9 @@ class Game
 
         String item = icommand.getSecondWord();
 
-        if(item.equals("1") && coins >= 10) {inventoryItems[0] = items[0];}
-        if(item.equals("2") && coins >= 6) {inventoryItems[1] = items[1];}
-        if(item.equals("3") && coins >= 50) {inventoryItems[2] = items[2];}
+        if(item.equals("1") && coins >= 10) {inventoryItems[1] = items[0];}
+        if(item.equals("2") && coins >= 6) {inventoryItems[2] = items[1];}
+        if(item.equals("3") && coins >= 50) {inventoryItems[3] = items[2];}
     }
 
     private static int getRandomNumberInRange(int min, int max) {
