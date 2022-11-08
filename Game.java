@@ -166,14 +166,14 @@ class Game
     private void offer() {
         System.out.println("Here are all offers that we have here:");
         System.out.println("");
-        System.out.println(ANSI_GREEN + "1 Energy Drink:");
+        System.out.println(ANSI_YELLOW + "1 Energy Drink:");
         System.out.println("    10 coins" + ANSI_RESET);
         System.out.println("");
-        System.out.println(ANSI_BLUE + "2 Green Apple");
+        System.out.println(ANSI_GREEN + "2 Green Apple");
         System.out.println("    6 coins" + ANSI_RESET);
         System.out.println("");
-        System.out.println(ANSI_YELLOW + "3 Pistol from the police officer");
-        System.out.println("    50 coins" + ANSI_RESET);
+        System.out.println("3 Pistol from the police officer");
+        System.out.println("    50 coins");
         System.out.println("");
         System.out.println("Use the number of the product to buy it!");
     }
