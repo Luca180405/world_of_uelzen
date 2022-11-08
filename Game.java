@@ -27,7 +27,7 @@ class Game
 
     private Parser parser;
     private Room currentRoom;
-    public String[] items = {ANSI_YELLOW + "Energy Drink" + ANSI_RESET, ANSI_GREEN + "Green Apple" + ANSI_RESET , "Pistol from the police officer"};
+    public String[] items = {ANSI_YELLOW + "Energy Drink" + ANSI_RESET, ANSI_GREEN + "Green Apple" + ANSI_RESET , ANSI_RED + "Pistol from the police officer" + ANSI_RESET};
     public String[] inventoryItems = new String[4];
     private int itemNumber = 0;
     public int coins = 100;
@@ -37,7 +37,11 @@ class Game
     public static final String ANSI_GREEN = "\u001B[32m";
     public static final String ANSI_BLUE = "\u001B[34m";
     public static final String ANSI_YELLOW = "\u001B[33m";
-    public static final String ANSI_RED = "	\u001B[31m";
+    public static final String ANSI_RED = "\u001B[31m";
+
+    public String hunger = "🍖🍖🍖🍖🍖";
+    public String lives = ANSI_RED + "♥️♥️♥️♥️♥️" + ANSI_RESET;
+    public String power = ANSI_YELLOW + "⚡ ⚡ ⚡ ⚡ ⚡" + ANSI_RESET;
 
     Room outside, theatre, pub, gym, policeoffice, marktcenter;
         
@@ -192,6 +196,14 @@ class Game
         if(item.equals("3") && coins >= 50) {inventoryItems[3] = items[2];}
     }
 
+    private void stats() {
+        System.out.println(lives);
+        System.out.println("");
+        System.out.println(hunger);
+        System.out.println("");
+        System.out.println(power);
+    }
+
     private static int getRandomNumberInRange(int min, int max) {
 
 		if (min >= max) {
@@ -234,6 +246,8 @@ class Game
             offer();
         else if(commandWord.equals("inventory"))
             showInventory();
+        else if(commandWord.equals("stats"))
+            stats();
         else if (commandWord.equals("quit"))
             wantToQuit = quit(command);
 
@@ -253,7 +267,7 @@ class Game
         System.out.println("around at the university.");
         System.out.println();
         System.out.println("Your command words are:");
-        System.out.println("   go quit help look coins donate shop offer inventory buy   ");
+        System.out.println("   go quit help look coins donate shop offer inventory buy stats  ");
     }
 
     /** 
