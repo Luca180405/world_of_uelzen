@@ -30,7 +30,7 @@ class Game
     public String[] items = {ANSI_YELLOW + "Energy Drink" + ANSI_RESET, ANSI_GREEN + "Green Apple" + ANSI_RESET , ANSI_RED + "Pistol from the police officer" + ANSI_RESET};
     public String[] inventoryItems = new String[4];
     private int itemNumber = 0;
-    public int coins = 100;
+    public int coins = 0;
     public int roomNumber = getRandomNumberInRange(1,6);
     private boolean searchTask = true;
     public static final String ANSI_RESET = "\u001B[0m";
@@ -40,8 +40,8 @@ class Game
     public static final String ANSI_RED = "\u001B[31m";
 
     public String hunger = "🍖🍖🍖🍖🍖";
-    public String lives = ANSI_RED + "♥️♥️♥️♥️♥️" + ANSI_RESET;
-    public String power = ANSI_YELLOW + "⚡ ⚡ ⚡ ⚡ ⚡" + ANSI_RESET;
+    public String lives = ANSI_RED + "❤️ ❤️ ❤️ ❤️ ❤️" + ANSI_RESET;
+    public String power = ANSI_YELLOW + "⚡⚡⚡⚡⚡" + ANSI_RESET;
 
     Room outside, theatre, pub, gym, policeoffice, marktcenter;
         
@@ -70,12 +70,12 @@ class Game
         policeoffice = new Room("in the police office👮‍♂️", "Help the police officers to find the rascal!");
         
         // initialise room exits
-        outside.setExits(null, theatre, gym, pub);
+        outside.setExits(pub, theatre, gym, marktcenter);
         theatre.setExits(null, marktcenter, null, outside);
-        pub.setExits(null, outside, null, null);
-        gym.setExits(marktcenter, policeoffice, null, null);
-        policeoffice.setExits(null, null, null, gym);
-        marktcenter.setExits(null, null, gym, null);
+        pub.setExits(null, null, outside, null);
+        gym.setExits(marktcenter, null, null, policeoffice);
+        policeoffice.setExits(null, pub, null, marktcenter);
+        marktcenter.setExits(outside, policeoffice, gym, theatre);
 
         
         if(roomNumber == 1) {
@@ -185,15 +185,15 @@ class Game
     private void buy(Command icommand) {
 
         if(!icommand.hasSecondWord()) {
-            System.out.println("Whatcha wanna buy?");
+            System.out.println("Whatcha wanna buy? Select a product!");
             return;
         }
 
         String item = icommand.getSecondWord();
 
-        if(item.equals("1") && coins >= 10) {inventoryItems[1] = items[0];}
-        if(item.equals("2") && coins >= 6) {inventoryItems[2] = items[1];}
-        if(item.equals("3") && coins >= 50) {inventoryItems[3] = items[2];}
+        if(item.equals("1") && coins >= 10) {inventoryItems[1] = items[0];coins-=10;}
+        if(item.equals("2") && coins >= 6) {inventoryItems[2] = items[1];coins-=6;}
+        if(item.equals("3") && coins >= 50) {inventoryItems[3] = items[2];coins-=50;}
     }
 
     private void stats() {
@@ -202,6 +202,36 @@ class Game
         System.out.println(hunger);
         System.out.println("");
         System.out.println(power);
+    }
+
+    private void drinks() {
+        if(currentRoom == pub) {
+        System.out.println(ANSI_RED + "0,5l Beer" + ANSI_RESET);
+        System.out.println("    6 coins");
+        System.out.println("");
+        System.out.println(ANSI_RED+"2cl Whiskey"+ANSI_RESET);
+        System.out.println("    10 coins");
+        System.out.println("");
+        System.out.println(ANSI_RED+"2,5cl Vodka"+ANSI_RESET);
+        System.out.println("    10 coins");
+        System.out.println("");
+        System.out.println(ANSI_RED + "0,4l Cola" + ANSI_RESET);
+        System.out.println("    8 coins");
+        }
+    }
+
+    private void drink(Command iDrink) {
+        if(!iDrink.hasSecondWord()) {
+            System.out.println("You wanna drink something?🍻");
+            return;
+        }
+
+        String drink = iDrink.getSecondWord();
+
+        if(drink.equals("Beer") && coins >= 6) {coins-=6;}
+        if(drink.equals("Whiskey") && coins >= 10) {coins-=10;}
+        if(drink.equals("Vodka") && coins >= 10) {coins-=10;}
+        if(drink.equals("Cola") && coins >= 8) {coins-=8;}
     }
 
     private static int getRandomNumberInRange(int min, int max) {
@@ -248,6 +278,10 @@ class Game
             showInventory();
         else if(commandWord.equals("stats"))
             stats();
+        else if(commandWord.equals("drinks"))
+            drinks();
+        else if(commandWord.equals("drink"))
+            drink(command);
         else if (commandWord.equals("quit"))
             wantToQuit = quit(command);
 
@@ -267,7 +301,7 @@ class Game
         System.out.println("around at the university.");
         System.out.println();
         System.out.println("Your command words are:");
-        System.out.println("   go quit help look coins donate shop offer inventory buy stats  ");
+        System.out.println("   go quit help look coins donate shop offer inventory buy stats drinks  ");
     }
 
     /** 
