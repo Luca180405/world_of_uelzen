@@ -29,6 +29,7 @@ class Game
     private Room currentRoom;
     public String[] items = {ANSI_YELLOW + "Energy Drink" + ANSI_RESET, ANSI_GREEN + "Green Apple" + ANSI_RESET , ANSI_RED + "Pistol from the police officer" + ANSI_RESET};
     public String[] inventoryItems = new String[4];
+    public String[] rooms = {"outside", "theatre", "pub", "gym", "policeoffice", "marktcenter"};
     private int itemNumber = 0;
     public int coins = 0;
     public int roomNumber = getRandomNumberInRange(1,6);
@@ -43,14 +44,8 @@ class Game
     public String lives = ANSI_RED + "❤️ ❤️ ❤️ ❤️ ❤️" + ANSI_RESET;
     public String power = ANSI_YELLOW + "⚡⚡⚡⚡⚡" + ANSI_RESET;
 
-    private Boolean taskOutside = false;
-    private Boolean taskMarktcenter = false;
-    private Boolean taskTheatre = false;
-    private Boolean taskPub = false;
-    private Boolean taskGym = false;
-    private Boolean taskPoliceoffice = false;
+    private int roomsVisited = 0;
 
-    private int checkRoomDone = 1;
 
     Room outside, theatre, pub, gym, policeoffice, marktcenter;
         
@@ -63,7 +58,6 @@ class Game
         parser = new Parser();
 
         inventoryItems[0] = ANSI_BLUE + "Bottle of water" + ANSI_RESET;
-        checkTasks();
     }
 
     /**
@@ -91,7 +85,7 @@ class Game
         if(roomNumber == 1) {
         currentRoom = outside; 
         }
-            if(roomNumber == 2) {
+        if(roomNumber == 2) {
         currentRoom = marktcenter;
         }
         if(roomNumber == 3) {
@@ -109,22 +103,6 @@ class Game
 
     }
 
-    private void checkTasks() {
-        if(taskOutside = true) {
-            if(currentRoom == theatre) {checkRoomDone += 1;}
-            if(currentRoom == pub) {checkRoomDone += 1;}
-            if(currentRoom == gym) {checkRoomDone += 1;}
-            if(currentRoom == policeoffice) {checkRoomDone += 1;}
-            if(currentRoom == marktcenter) {checkRoomDone += 1;}
-        }
-
-        if(checkRoomDone == 6) {
-            coins += 20;
-            System.out.println("You've completed a task and got 20 coins!");
-            System.out.println("Congrats!🎉");
-        }
-    }
-
     /**
      *  Main play routine.  Loops until end of play.
      */
@@ -139,8 +117,10 @@ class Game
         while (! finished) {
             Command command = parser.getCommand();
             finished = processCommand(command);
+            checkTasks();
         }
         System.out.println("Thank you for playing.🎉  Good bye.👋");
+
     }
 
     /**
@@ -168,6 +148,11 @@ class Game
         System.out.println();
     }
 
+    private void checkTasks() {
+        for(String i : rooms) {
+            roomsVisited
+        }
+    }
 
     private void look()
     {
@@ -262,17 +247,6 @@ class Game
         if(drink.equals("Cola") && coins >= 8) {coins-=8;}
     }
 
-    private void accept() {
-        
-        if(currentRoom == outside) {taskOutside = true;}
-        if(currentRoom == marktcenter) {taskMarktcenter = true;}
-        if(currentRoom == theatre) {taskTheatre = true;}
-        if(currentRoom == pub) {taskPub = true;}
-        if(currentRoom == gym) {taskGym = true;}
-        if(currentRoom == policeoffice) {taskPoliceoffice = true;}
-
-    }
-
     private static int getRandomNumberInRange(int min, int max) {
 
 		if (min >= max) {
@@ -303,8 +277,6 @@ class Game
             goRoom(command);
         else if (commandWord.equals("look"))
             look();
-        else if (commandWord.equals("accept"))
-            accept();
         else if (commandWord.equals("donate"))
             donate();
         else if (commandWord.equals("coins"))
@@ -342,7 +314,7 @@ class Game
         System.out.println("around at the university.");
         System.out.println();
         System.out.println("Your command words are:");
-        System.out.println("   go quit help look accept coins donate shop offer inventory buy stats drinks drink  ");
+        System.out.println("   go quit help look coins donate shop offer inventory buy stats drinks drink  ");
     }
 
     /** 
