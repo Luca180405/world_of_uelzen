@@ -29,7 +29,6 @@ class Game
     private Room currentRoom;
     public String[] items = {ANSI_YELLOW + "Energy Drink" + ANSI_RESET, ANSI_GREEN + "Green Apple" + ANSI_RESET , ANSI_RED + "Pistol from the police officer" + ANSI_RESET};
     public String[] inventoryItems = new String[4];
-    public String[] rooms = {"outside", "theatre", "pub", "gym", "policeoffice", "marktcenter"};
     private int itemNumber = 0;
     public int coins = 0;
     public int roomNumber = getRandomNumberInRange(1,6);
@@ -44,7 +43,15 @@ class Game
     public String lives = ANSI_RED + "❤️ ❤️ ❤️ ❤️ ❤️" + ANSI_RESET;
     public String power = ANSI_YELLOW + "⚡⚡⚡⚡⚡" + ANSI_RESET;
 
-    private int roomsVisited = 0;
+    boolean allRoomsTask = false;
+
+    boolean outsideTask = false;
+    boolean marktcenterTask = false;
+    boolean gymTask = false;
+    boolean pubTask = false;
+    boolean theatreTask = false;
+    boolean policeofficeTask = false;
+
 
 
     Room outside, theatre, pub, gym, policeoffice, marktcenter;
@@ -117,7 +124,10 @@ class Game
         while (! finished) {
             Command command = parser.getCommand();
             finished = processCommand(command);
+
+            if(allRoomsTask == false) {
             checkTasks();
+            }
         }
         System.out.println("Thank you for playing.🎉  Good bye.👋");
 
@@ -149,9 +159,19 @@ class Game
     }
 
     private void checkTasks() {
-        for(String i : rooms) {
-            roomsVisited
+
+        if(currentRoom == outside) {outsideTask = true;}
+        if(currentRoom == marktcenter) {marktcenterTask = true;}
+        if(currentRoom == gym) {gymTask = true;}
+        if(currentRoom == pub) {pubTask = true;}
+        if(currentRoom == policeoffice) {policeofficeTask = true;}
+        if(currentRoom == theatre) {theatreTask = true;}
+
+        if(outsideTask = true && marktcenterTask == true && gymTask == true && pubTask == true && policeofficeTask == true && theatreTask == true) {
+            allRoomsTask = true;
+            coins = coins + 100;
         }
+
     }
 
     private void look()
