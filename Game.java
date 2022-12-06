@@ -44,6 +44,7 @@ class Game
     public String power = ANSI_YELLOW + "⚡⚡⚡⚡⚡" + ANSI_RESET;
 
     boolean allRoomsTask = false;
+    boolean policeTask = false;
 
     boolean outsideTask = false;
     boolean marktcenterTask = false;
