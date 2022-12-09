@@ -53,6 +53,11 @@ class Game
     boolean theatreTask = false;
     boolean policeofficeTask = false;
 
+    boolean energyBuyed = false;
+
+    Room actorLocation; 
+    Room dumbelLocation;
+
 
 
     Room outside, theatre, pub, gym, policeoffice, marktcenter;
@@ -75,7 +80,7 @@ class Game
     { 
         // create the rooms
         outside = new Room("outside the main entrance of the city🏙️", "Go to every location on the map!");
-        marktcenter = new Room("in the marktcenter🛒","Find some energy drinks to increase your strength! To buy things at the store type in 'shop'!");
+        marktcenter = new Room("in the marktcenter🛒","Buy an energy drink to increase your strength! To buy things at the store type in 'shop'!");
         theatre = new Room("in the theatre🎭", "Find the actors in the city!");
         pub = new Room("in the city pub🍾", "Drink more shots as the buddergolem!!");
         gym = new Room("in a gym🏃", "Find the lost dumbbell in the city!");
@@ -109,6 +114,46 @@ class Game
         currentRoom = policeoffice;
         }
 
+
+        //Random Spawn for actor
+        if(roomNumber == 1) {
+        actorLocation = marktcenter; 
+        }
+        if(roomNumber == 2) {
+        actorLocation = outside;
+        }
+        if(roomNumber == 3) {
+        actorLocation = pub;
+        }
+        if(roomNumber == 4) {
+        actorLocation = theatre;
+        }
+        if(roomNumber == 5) {
+        actorLocation = policeoffice;
+        }
+        if(roomNumber == 6) {
+        actorLocation = gym;
+        }
+
+        //Random dumbel location
+        if(roomNumber == 1) {
+        dumbelLocation = pub; 
+        }
+        if(roomNumber == 2) {
+        dumbelLocation = theatre;
+        }
+        if(roomNumber == 3) {
+        dumbelLocation = marktcenter;
+        }
+        if(roomNumber == 4) {
+        dumbelLocation = outside;
+        }
+        if(roomNumber == 5) {
+        dumbelLocation = gym;
+        }
+        if(roomNumber == 6) {
+        dumbelLocation = policeoffice;
+        }
     }
 
     /**
@@ -168,16 +213,21 @@ class Game
         if(currentRoom == policeoffice) {policeofficeTask = true;}
         if(currentRoom == theatre) {theatreTask = true;}
 
-        if(outsideTask = true && marktcenterTask == true && gymTask == true && pubTask == true && policeofficeTask == true && theatreTask == true) {
+        if(outsideTask == true && marktcenterTask == true && gymTask == true && pubTask == true && policeofficeTask == true && theatreTask == true) {
             allRoomsTask = true;
-            coins = coins + 100;
+            coins = coins + 10;
+
+            System.out.println("Congratualtions!🎉 You've visited every location on the map!");
+            System.out.println(ANSI_RED + "You've got: 10 Coins" + ANSI_RESET);
         }
 
     }
+    
 
     private void look()
     {
         System.out.println("You're " + currentRoom.description);
+        if(dumbelLocation == currentRoom) {System.out.println(ANSI_RED + "You've found the lost dumbel!" + ANSI_RESET);System.out.println("You've got: 10 coins"); coins += coins;}
     }
 
     private void donate() {
@@ -225,7 +275,7 @@ class Game
 
         String item = icommand.getSecondWord();
 
-        if(item.equals("1") && coins >= 10) {inventoryItems[1] = items[0];coins-=10;}
+        if(item.equals("1") && coins >= 10) {inventoryItems[1] = items[0];coins-=10; energyBuyed = true;}
         if(item.equals("2") && coins >= 6) {inventoryItems[2] = items[1];coins-=6;}
         if(item.equals("3") && coins >= 50) {inventoryItems[3] = items[2];coins-=50;}
     }
