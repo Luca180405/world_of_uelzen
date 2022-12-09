@@ -39,10 +39,6 @@ class Game
     public static final String ANSI_YELLOW = "\u001B[33m";
     public static final String ANSI_RED = "\u001B[31m";
 
-    public String hunger = "🍖🍖🍖🍖🍖";
-    public String lives = ANSI_RED + "❤️ ❤️ ❤️ ❤️ ❤️" + ANSI_RESET;
-    public String power = ANSI_YELLOW + "⚡⚡⚡⚡⚡" + ANSI_RESET;
-
     boolean allRoomsTask = false;
     boolean policeTask = false;
 
@@ -79,11 +75,11 @@ class Game
     private void createRooms()
     { 
         // create the rooms
-        outside = new Room("outside the main entrance of the city🏙️", "Go to every location on the map!");
+        outside = new Room("outside the main entrance of the city🏙️", "Go to every location on the map!"); //working
         marktcenter = new Room("in the marktcenter🛒","Buy an energy drink to increase your strength! To buy things at the store type in 'shop'!");
         theatre = new Room("in the theatre🎭", "Find the actors in the city!");
         pub = new Room("in the city pub🍾", "Drink more shots as the buddergolem!!");
-        gym = new Room("in a gym🏃", "Find the lost dumbbell in the city!");
+        gym = new Room("in a gym🏃", "Find the lost dumbbell in the city!");  //working
         policeoffice = new Room("in the police office👮‍♂️", "Help the police officers to find the rascal!");
         
         // initialise room exits
@@ -280,14 +276,6 @@ class Game
         if(item.equals("3") && coins >= 50) {inventoryItems[3] = items[2];coins-=50;}
     }
 
-    private void stats() {
-        System.out.println(lives);
-        System.out.println("");
-        System.out.println(hunger);
-        System.out.println("");
-        System.out.println(power);
-    }
-
     private void drinks() {
         if(currentRoom == pub) {
         System.out.println(ANSI_RED + "0,5l Beer" + ANSI_RESET);
@@ -360,8 +348,6 @@ class Game
             offer();
         else if(commandWord.equals("inventory"))
             showInventory();
-        else if(commandWord.equals("stats"))
-            stats();
         else if(commandWord.equals("drinks"))
             drinks();
         else if(commandWord.equals("drink"))
@@ -385,7 +371,7 @@ class Game
         System.out.println("around at the university.");
         System.out.println();
         System.out.println("Your command words are:");
-        System.out.println("   go quit help look coins donate shop offer inventory buy stats drinks drink  ");
+        System.out.println("   go quit help look coins donate shop offer inventory buy drinks drink  ");
     }
 
     /** 
