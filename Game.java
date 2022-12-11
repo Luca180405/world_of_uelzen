@@ -81,7 +81,7 @@ class Game
         theatre = new Room("in the theatre🎭", "Find the actors in the city!"); //working
         pub = new Room("in the city pub🍾", "Drink more shots as the buddergolem!!");
         gym = new Room("in a gym🏃", "Find the lost dumbbell in the city!");  //working
-        policeoffice = new Room("in the police office👮‍♂️", "Help the police officers to find the thief!");
+        policeoffice = new Room("in the police office👮‍♂️", "Help the police officers to find the thief!"); //working
         townhall = new Room(ANSI_GREEN, ANSI_BLUE);
         
         // initialise room exits
