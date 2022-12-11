@@ -52,11 +52,12 @@ class Game
     boolean energyBuyed = false;
 
     Room actorLocation; 
+    Room thiefLocation;
     Room dumbelLocation;
 
 
 
-    Room outside, theatre, pub, gym, policeoffice, marktcenter;
+    Room outside, theatre, pub, gym, policeoffice, marktcenter,townhall;
         
     /**
      * Create the game and initialise its internal map.
@@ -76,20 +77,24 @@ class Game
     { 
         // create the rooms
         outside = new Room("outside the main entrance of the city🏙️", "Go to every location on the map!"); //working
-        marktcenter = new Room("in the marktcenter🛒","Buy an energy drink to increase your strength! To buy things at the store type in 'shop'!");
-        theatre = new Room("in the theatre🎭", "Find the actors in the city!");
+        marktcenter = new Room("in the marktcenter🛒","Buy an energy drink to increase your strength! To buy things at the store type in 'shop'!"); //working
+        theatre = new Room("in the theatre🎭", "Find the actors in the city!"); //working
         pub = new Room("in the city pub🍾", "Drink more shots as the buddergolem!!");
         gym = new Room("in a gym🏃", "Find the lost dumbbell in the city!");  //working
-        policeoffice = new Room("in the police office👮‍♂️", "Help the police officers to find the rascal!");
+        policeoffice = new Room("in the police office👮‍♂️", "Help the police officers to find the thief!");
+        townhall = new Room(ANSI_GREEN, ANSI_BLUE);
         
         // initialise room exits
         outside.setExits(pub, theatre, gym, marktcenter);
         theatre.setExits(null, marktcenter, null, outside);
-        pub.setExits(null, null, outside, null);
+        pub.setExits(null, townhall, outside, null);
         gym.setExits(marktcenter, null, null, policeoffice);
         policeoffice.setExits(null, pub, null, marktcenter);
         marktcenter.setExits(outside, policeoffice, gym, theatre);
+        townhall.setExits(townhall, townhall, pub, townhall);
 
+
+        thiefLocation = marktcenter;
         
         if(roomNumber == 1) {
         currentRoom = outside; 
@@ -223,7 +228,34 @@ class Game
     private void look()
     {
         System.out.println("You're " + currentRoom.description);
-        if(dumbelLocation == currentRoom) {System.out.println(ANSI_RED + "You've found the lost dumbel!" + ANSI_RESET);System.out.println("You've got: 10 coins"); coins += coins;}
+        if(dumbelLocation == currentRoom) {System.out.println(ANSI_RED + "You've found the lost dumbel!" + ANSI_RESET);System.out.println("You've got: 10 coins"); coins += 10;}
+        if(actorLocation == currentRoom) {System.out.println(ANSI_RED + "You've found the actors from the theater!" + ANSI_RESET);System.out.println("You've got: 10 coins"); coins += 10;}
+        if(currentRoom == marktcenter) {
+
+        if(roomNumber == 1) {
+            actorLocation = townhall; 
+        }
+        if(roomNumber == 2) {
+            actorLocation = outside;
+        }
+        if(roomNumber == 3) {
+            actorLocation = pub;
+        }
+        if(roomNumber == 4) {
+            actorLocation = theatre;
+        }
+        if(roomNumber == 5) {
+            actorLocation = policeoffice;
+        }
+        if(roomNumber == 6) {
+            actorLocation = gym;
+        }
+
+            System.out.println("There is the thief! Run and get him!"); 
+            System.out.println("The thief flew to:" + thiefLocation);
+        }
+
+        if(thiefLocation == currentRoom && currentRoom != marktcenter) {System.out.println("There's the thief! You've catched him this time!"); System.out.println(ANSI_RED + "You've got: 20 coins" + ANSI_RESET); coins+= 20;}
     }
 
     private void donate() {
@@ -271,7 +303,10 @@ class Game
 
         String item = icommand.getSecondWord();
 
-        if(item.equals("1") && coins >= 10) {inventoryItems[1] = items[0];coins-=10; energyBuyed = true;}
+        if(item.equals("1") && coins >= 10) {inventoryItems[1] = items[0];coins-=10; energyBuyed = true; if(energyBuyed) {coins+=10;} 
+            System.out.println("Congratualtions!🎉 You've got an energy drink!");
+            System.out.println(ANSI_RED + "You've got: 10 Coins" + ANSI_RESET);
+        }
         if(item.equals("2") && coins >= 6) {inventoryItems[2] = items[1];coins-=6;}
         if(item.equals("3") && coins >= 50) {inventoryItems[3] = items[2];coins-=50;}
     }
