@@ -62,6 +62,8 @@ class Game
     Room thiefLocation;
     Room dumbelLocation;
 
+    String thiefLocationName;
+
 
 
     public static Room outside, theatre, pub, gym, policeoffice, marktcenter,townhall;
@@ -243,26 +245,32 @@ class Game
         if(currentRoom == marktcenter) {
 
         if(roomNumber == 1) {
-            actorLocation = townhall; 
+            thiefLocation = townhall; 
+            thiefLocationName = " townhall";
         }
         if(roomNumber == 2) {
-            actorLocation = outside;
+            thiefLocation = outside;
+            thiefLocationName = " outside";
         }
         if(roomNumber == 3) {
-            actorLocation = pub;
+            thiefLocation = pub;
+            thiefLocationName = " pub";
         }
         if(roomNumber == 4) {
-            actorLocation = theatre;
+            thiefLocation = theatre;
+            thiefLocationName = " theatre";
         }
         if(roomNumber == 5) {
-            actorLocation = policeoffice;
+            thiefLocation = policeoffice;
+            thiefLocationName = " policeoffice";
         }
         if(roomNumber == 6) {
-            actorLocation = gym;
+            thiefLocation = gym;
+            thiefLocationName = " gym";
         }
 
             System.out.println("There is the thief! Run and get him!"); 
-            System.out.println("The thief flew to:" + currentRoom.getName());
+            System.out.println("The thief flew to:" + thiefLocationName);
         }
 
         if(thiefLocation == currentRoom && currentRoom != marktcenter) {System.out.println("There's the thief! You've catched him this time!"); System.out.println(ANSI_RED + "You've got: 20 coins" + ANSI_RESET); coins+= 20;thiefTask = true;}
