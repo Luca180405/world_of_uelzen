@@ -26,11 +26,11 @@ class Game
     }
 
     private Parser parser;
-    private Room currentRoom;
+    public static Room currentRoom;
     public String[] items = {ANSI_YELLOW + "Energy Drink" + ANSI_RESET, ANSI_GREEN + "Green Apple" + ANSI_RESET , ANSI_RED + "Pistol from the police officer" + ANSI_RESET};
     public String[] inventoryItems = new String[4];
     private int itemNumber = 0;
-    public int coins = 0;
+    public int coins = 10;
     public int roomNumber = getRandomNumberInRange(1,6);
     private boolean searchTask = true;
     public static final String ANSI_RESET = "\u001B[0m";
@@ -49,6 +49,13 @@ class Game
     boolean theatreTask = false;
     boolean policeofficeTask = false;
 
+    boolean thiefTask = false;
+    boolean actorTask = false;
+    boolean dumbelTask = false;
+    boolean everyRoomTask = false;
+    boolean energyTask = false;
+    boolean drinkTask = false;
+
     boolean energyBuyed = false;
 
     Room actorLocation; 
@@ -57,7 +64,7 @@ class Game
 
 
 
-    Room outside, theatre, pub, gym, policeoffice, marktcenter,townhall;
+    public static Room outside, theatre, pub, gym, policeoffice, marktcenter,townhall;
         
     /**
      * Create the game and initialise its internal map.
@@ -79,15 +86,15 @@ class Game
         outside = new Room("outside the main entrance of the city🏙️", "Go to every location on the map!"); //working
         marktcenter = new Room("in the marktcenter🛒","Buy an energy drink to increase your strength! To buy things at the store type in 'shop'!"); //working
         theatre = new Room("in the theatre🎭", "Find the actors in the city!"); //working
-        pub = new Room("in the city pub🍾", "Drink more shots as the buddergolem!!");
+        pub = new Room("in the city pub🍾 Type in drinks to see all drinks you can buy", "Buy a drink!"); //working
         gym = new Room("in a gym🏃", "Find the lost dumbbell in the city!");  //working
         policeoffice = new Room("in the police office👮‍♂️", "Help the police officers to find the thief!"); //working
-        townhall = new Room(ANSI_GREEN, ANSI_BLUE);
+        townhall = new Room("in the wonderful townhall.🏢 There's only one exit right! Try it out!", "Defeat the boss after completing all the other Tasks!");
         
         // initialise room exits
         outside.setExits(pub, theatre, gym, marktcenter);
         theatre.setExits(null, marktcenter, null, outside);
-        pub.setExits(null, townhall, outside, null);
+        pub.setExits(townhall, null, outside, null);
         gym.setExits(marktcenter, null, null, policeoffice);
         policeoffice.setExits(null, pub, null, marktcenter);
         marktcenter.setExits(outside, policeoffice, gym, theatre);
@@ -175,6 +182,7 @@ class Game
             if(allRoomsTask == false) {
             checkTasks();
             }
+            endMessage();
         }
         System.out.println("Thank you for playing.🎉  Good bye.👋");
 
@@ -216,11 +224,13 @@ class Game
 
         if(outsideTask == true && marktcenterTask == true && gymTask == true && pubTask == true && policeofficeTask == true && theatreTask == true) {
             allRoomsTask = true;
+            everyRoomTask = true;
             coins = coins + 10;
 
             System.out.println("Congratualtions!🎉 You've visited every location on the map!");
             System.out.println(ANSI_RED + "You've got: 10 Coins" + ANSI_RESET);
         }
+
 
     }
     
@@ -228,8 +238,8 @@ class Game
     private void look()
     {
         System.out.println("You're " + currentRoom.description);
-        if(dumbelLocation == currentRoom) {System.out.println(ANSI_RED + "You've found the lost dumbel!" + ANSI_RESET);System.out.println("You've got: 10 coins"); coins += 10;}
-        if(actorLocation == currentRoom) {System.out.println(ANSI_RED + "You've found the actors from the theater!" + ANSI_RESET);System.out.println("You've got: 10 coins"); coins += 10;}
+        if(dumbelLocation == currentRoom) {System.out.println("You've found the lost dumbel!");System.out.println(ANSI_RED + "You've got: 10 coins" + ANSI_RESET); coins += 10; dumbelTask = true;}
+        if(actorLocation == currentRoom) {System.out.println("You've found the actors from the theater!");System.out.println(ANSI_RED + "You've got: 10 coins" + ANSI_RESET); coins += 10; actorTask = true;}
         if(currentRoom == marktcenter) {
 
         if(roomNumber == 1) {
@@ -252,14 +262,10 @@ class Game
         }
 
             System.out.println("There is the thief! Run and get him!"); 
-            System.out.println("The thief flew to:" + thiefLocation);
+            System.out.println("The thief flew to:" + currentRoom.getName());
         }
 
-        if(thiefLocation == currentRoom && currentRoom != marktcenter) {System.out.println("There's the thief! You've catched him this time!"); System.out.println(ANSI_RED + "You've got: 20 coins" + ANSI_RESET); coins+= 20;}
-    }
-
-    private void donate() {
-        coins = 0;
+        if(thiefLocation == currentRoom && currentRoom != marktcenter) {System.out.println("There's the thief! You've catched him this time!"); System.out.println(ANSI_RED + "You've got: 20 coins" + ANSI_RESET); coins+= 20;thiefTask = true;}
     }
 
     private void printCoins()
@@ -303,12 +309,16 @@ class Game
 
         String item = icommand.getSecondWord();
 
-        if(item.equals("1") && coins >= 10) {inventoryItems[1] = items[0];coins-=10; energyBuyed = true; if(energyBuyed) {coins+=10;} 
+        if(item.equals("1") && coins >= 10) {inventoryItems[1] = items[0];coins-=10; energyBuyed = true; if(energyBuyed) {coins+=10; energyTask =true;} 
             System.out.println("Congratualtions!🎉 You've got an energy drink!");
             System.out.println(ANSI_RED + "You've got: 10 Coins" + ANSI_RESET);
         }
         if(item.equals("2") && coins >= 6) {inventoryItems[2] = items[1];coins-=6;}
         if(item.equals("3") && coins >= 50) {inventoryItems[3] = items[2];coins-=50;}
+    }
+
+    private void endMessage() {
+        if(dumbelTask && actorTask && thiefTask&& everyRoomTask && energyTask && drinkTask) {System.out.println("You've completed every Task!");System.out.println(ANSI_RED + "You've unlocked the boss! You can fight him in the townhall to finish the Game!" + ANSI_RESET); System.out.println("tip: A weapon from the marktcenter could help you to win!");}
     }
 
     private void drinks() {
@@ -335,10 +345,11 @@ class Game
 
         String drink = iDrink.getSecondWord();
 
-        if(drink.equals("Beer") && coins >= 6) {coins-=6;}
-        if(drink.equals("Whiskey") && coins >= 10) {coins-=10;}
-        if(drink.equals("Vodka") && coins >= 10) {coins-=10;}
-        if(drink.equals("Cola") && coins >= 8) {coins-=8;}
+        if(drink.equals("Beer") && coins >= 6) {coins-=6; System.out.println("Congrats!🎉 You've completed the task!"); System.out.println(ANSI_RED + "You've got 10 coins"+  ANSI_RESET); coins += 10;System.out.println("You've drunk your " + drink);}
+        if(drink.equals("Whiskey") && coins >= 10) {coins-=10; System.out.println("Congrats!🎉 You've completed the task!"); System.out.println(ANSI_RED + "You've got 10 coins"+  ANSI_RESET); coins += 10;System.out.println("You've drunk your " + drink);}
+        if(drink.equals("Vodka") && coins >= 10) {coins-=10; System.out.println("Congrats!🎉 You've completed the task!"); System.out.println(ANSI_RED + "You've got 10 coins"+  ANSI_RESET); coins += 10;System.out.println("You've drunk your " + drink);}
+        if(drink.equals("Cola") && coins >= 8) {coins-=8; System.out.println("Congrats!🎉 You've completed the task!"); System.out.println(ANSI_RED + "You've got 10 coins"+  ANSI_RESET); coins += 10;System.out.println("You've drunk your " + drink);}
+        if(drink.equals("Energy Drink")) {System.out.println("You've drunk your " + drink);}
     }
 
     private static int getRandomNumberInRange(int min, int max) {
@@ -371,8 +382,6 @@ class Game
             goRoom(command);
         else if (commandWord.equals("look"))
             look();
-        else if (commandWord.equals("donate"))
-            donate();
         else if (commandWord.equals("coins"))
             printCoins();
         else if(commandWord.equals("shop") && currentRoom == marktcenter)

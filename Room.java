@@ -21,6 +21,7 @@ class Room
     public Room eastExit;
     public Room westExit;
     public String tasks;
+    public static String name;
 
     /**
      * Create a room described "description". Initially, it has
@@ -61,6 +62,18 @@ class Room
     public String getTask()
     {
         return tasks;
+    }
+
+    public String getName()
+    {
+        if(Game.currentRoom == Game.marktcenter) {name = " marktcenter";}
+        if(Game.currentRoom == Game.gym) {name=" gym";}
+        if(Game.currentRoom == Game.outside) {name=" outside";}
+        if(Game.currentRoom == Game.policeoffice) {name=" policeoffice";}
+        if(Game.currentRoom == Game.pub) {name=" pub";}
+        if(Game.currentRoom == Game.theatre) {name=" theatre";}
+
+        return name;
     }
 
 }
