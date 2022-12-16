@@ -1,1 +1,6 @@
 .DS_Store
+/Command.class
+/CommandWords.class
+/Game.class
+/Parser.class
+/Room.class
