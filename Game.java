@@ -64,6 +64,9 @@ class Game
 
     String thiefLocationName;
 
+    String bossName = "Burgermeister from Uelzen";
+    Room bossLocation = townhall;
+
 
 
     public static Room outside, theatre, pub, gym, policeoffice, marktcenter,townhall;
@@ -272,6 +275,8 @@ class Game
             System.out.println("There is the thief! Run and get him!"); 
             System.out.println("The thief flew to:" + thiefLocationName);
         }
+
+        if(bossLocation == currentRoom) {System.out.println("There is " + bossName + "! Try to defeat him to win the game!");}
 
         if(thiefLocation == currentRoom && currentRoom != marktcenter) {System.out.println("There's the thief! You've catched him this time!"); System.out.println(ANSI_RED + "You've got: 20 coins" + ANSI_RESET); coins+= 20;thiefTask = true;}
     }
