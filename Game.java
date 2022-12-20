@@ -93,10 +93,10 @@ class Game
         outside = new Room("outside the main entrance of the city🏙️", "Go to every location on the map!"); //working
         marktcenter = new Room("in the marktcenter🛒","Buy an energy drink to increase your strength! To buy things at the store type in 'shop'!"); //working
         theatre = new Room("in the theatre🎭", "Find the actors in the city!"); //working
-        pub = new Room("in the city pub🍾 Type in drinks to see all drinks you can buy", "Buy a drink!"); //working
+        pub = new Room("in the city pub🍾 \nType in drinks to see all drinks you can buy", "Buy a drink!"); //working
         gym = new Room("in a gym🏃", "Find the lost dumbbell in the city!");  //working
         policeoffice = new Room("in the police office👮‍♂️", "Help the police officers to find the thief!"); //working
-        townhall = new Room("in the wonderful townhall.🏢 There's only one exit right! Try it out!", "Defeat the boss after completing all the other Tasks!");
+        townhall = new Room("in the wonderful townhall.🏢 \nThere's only one exit right! Try it out!", "Defeat the boss after completing all the other Tasks!");
         
         // initialise room exits
         outside.setExits(pub, theatre, gym, marktcenter);
