@@ -30,7 +30,7 @@ class Game
     public String[] items = {ANSI_YELLOW + "Energy Drink" + ANSI_RESET, ANSI_GREEN + "Green Apple" + ANSI_RESET , ANSI_RED + "Pistol from the police officer" + ANSI_RESET};
     public String[] inventoryItems = new String[4];
     private int itemNumber = 0;
-    public int coins = 10;
+    public int coins = 0;
     public int roomNumber = getRandomNumberInRange(1,6);
     private boolean searchTask = true;
     public static final String ANSI_RESET = "\u001B[0m";
