@@ -66,6 +66,8 @@ class Game
 
     String bossName = "Burgermeister from Uelzen";
     Room bossLocation = townhall;
+    int bossLives = 100;
+    boolean bossFight = true;
 
 
 
@@ -276,7 +278,7 @@ class Game
             System.out.println("The thief flew to:" + thiefLocationName);
         }
 
-        if(bossLocation == currentRoom) {System.out.println("There is " + bossName + "! Try to defeat him to win the game!");}
+        if(bossLocation == currentRoom && dumbelTask && actorTask && thiefTask&& everyRoomTask && energyTask && drinkTask) {System.out.println("There is " + bossName + "! Try to defeat him to win the game!"); bossFight = true;}
 
         if(thiefLocation == currentRoom && currentRoom != marktcenter) {System.out.println("There's the thief! You've catched him this time!"); System.out.println(ANSI_RED + "You've got: 20 coins" + ANSI_RESET); coins+= 20;thiefTask = true;}
     }
@@ -476,6 +478,10 @@ class Game
             if(currentRoom.westExit != null)
                 System.out.print("west ");
             System.out.println();
+
+            if(currentRoom == townhall && bossFight) {
+                System.out.println(ANSI_RED +  "The boss has: " + bossLives + " lives left" + ANSI_RESET);
+                }
         }
     }
 
