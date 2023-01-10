@@ -67,7 +67,7 @@ class Game
     String bossName = "Burgermeister from Uelzen";
     Room bossLocation = townhall;
     int bossLives = 100;
-    boolean bossFight = true;
+    boolean bossFight = false;
 
 
 
@@ -367,6 +367,11 @@ class Game
         if(drink.equals("Energy Drink")) {System.out.println("You've drunk your " + drink);}
     }
 
+    private void use(Command iUsed) {
+
+        String use = iUsed.getSecondWord();
+    }
+
     private static int getRandomNumberInRange(int min, int max) {
 
 		if (min >= max) {
@@ -411,6 +416,8 @@ class Game
             drinks();
         else if(commandWord.equals("drink"))
             drink(command);
+        else if(commandWord.equals("use"))
+            use(command);
         else if (commandWord.equals("quit"))
             wantToQuit = quit(command);
 
