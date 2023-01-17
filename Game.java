@@ -372,6 +372,10 @@ class Game
         String use = iUsed.getSecondWord();
     }
 
+    private void shot() {
+
+    }
+
     private static int getRandomNumberInRange(int min, int max) {
 
 		if (min >= max) {
@@ -418,6 +422,8 @@ class Game
             drink(command);
         else if(commandWord.equals("use"))
             use(command);
+        else if(commandWord.equals("shot"))
+            shot();
         else if (commandWord.equals("quit"))
             wantToQuit = quit(command);
 
