@@ -190,6 +190,7 @@ class Game
             checkTasks();
             }
             endMessage();
+            bossKilled();
         }
         System.out.println("Thank you for playing.🎉  Good bye.👋");
 
@@ -336,6 +337,13 @@ class Game
         if(dumbelTask && actorTask && thiefTask&& everyRoomTask && energyTask && drinkTask) {System.out.println("You've completed every Task!");System.out.println(ANSI_RED + "You've unlocked the boss! You can fight him in the townhall to finish the Game!" + ANSI_RESET); System.out.println("tip: A weapon from the marktcenter could help you to win!");}
     }
 
+    private void bossKilled() {
+        if(bossLives == 0) {
+        System.out.println("You've killed the boss!");
+        System.out.println("Congrats!🎉 You've completed the game now!");
+        }
+    }
+
     private void drinks() {
         if(currentRoom == pub) {
         System.out.println(ANSI_RED + "0,5l Beer" + ANSI_RESET);
@@ -373,7 +381,10 @@ class Game
     }
 
     private void shot() {
+        bossLives -= 25;
 
+        System.out.println("You've shot the boss");
+        System.out.println("The boss currently has " + bossLives + " lives!");
     }
 
     private static int getRandomNumberInRange(int min, int max) {
